@@ -1,3 +1,5 @@
+![Spacestagram](/Untitled.png)
+
 # &#128640; Spacestagram
 
 A webpage that pulls images using the NASA's "Picture of The Day" API and allows the user to 'like' and 'unlike' their favourite images\
