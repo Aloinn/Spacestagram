@@ -17,11 +17,13 @@ import 'firebase/auth';
 
 export default defineComponent({
   props: { label: String },
-  setup() {
+  emits: ['authed'],
+  setup(_, { emit }) {
     const provider = new firebase.auth.GoogleAuthProvider();
 
     const signIn = async () => {
       await firebase.auth().signInWithPopup(provider);
+      emit('authed', true);
     };
     return {
       signIn,

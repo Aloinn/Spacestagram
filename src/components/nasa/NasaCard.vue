@@ -37,7 +37,13 @@
                 {{ likes.length }}
               </div>
             </q-btn>
-            <q-btn outline icon="share" color="primary" size="md" />
+            <q-btn
+              outline
+              :href="info.hdurl"
+              icon="share"
+              color="primary"
+              size="md"
+            />
           </div>
         </div>
       </q-card-section>
@@ -49,14 +55,12 @@
 <script lang="ts">
 import { defineComponent, PropType, ref, computed } from 'vue';
 import 'firebase/auth';
-import { DailyData } from '../models';
+import { DailyData, Post } from '../models';
 import firebase from 'firebase';
 import 'firebase/firestore';
 import { useFirebaseUser } from 'src/util/firebase-auth';
-
-interface Post {
-  likes: string[];
-}
+import AuthDialog from '../auth/AuthDialog.vue';
+import { useQuasar } from 'quasar';
 
 export default defineComponent({
   props: { info: Object as PropType<DailyData> },
@@ -65,19 +69,24 @@ export default defineComponent({
     const likes = ref<string[]>([]);
     const postRef = db.collection('likes').doc(`${props?.info?.date || ''}`);
     postRef.onSnapshot((snap) => {
-      likes.value = (snap.data() as unknown as Post).likes;
+      likes.value = (snap.data() as Post)?.likes ?? [];
     });
     const userAuth = useFirebaseUser();
+
+    const $q = useQuasar();
     const like = async () => {
+      if (!userAuth?.value) {
+        $q.dialog({
+          component: AuthDialog,
+        });
+        return;
+      }
+
       await postRef.set(
         {
           likes: likes.value?.includes(userAuth?.value?.uid || '')
-            ? firebase.firestore.FieldValue.arrayRemove(
-                userAuth?.value?.uid || 'ANON'
-              )
-            : firebase.firestore.FieldValue.arrayUnion(
-                userAuth?.value?.uid || 'ANON'
-              ),
+            ? firebase.firestore.FieldValue.arrayRemove(userAuth?.value?.uid)
+            : firebase.firestore.FieldValue.arrayUnion(userAuth?.value?.uid),
         },
         { merge: true }
       );
@@ -85,6 +94,7 @@ export default defineComponent({
     const liked = computed(
       () => likes?.value?.includes(userAuth?.value?.uid || 'ANON') ?? false
     );
+
     return { like, likes, liked, userAuth };
   },
 });

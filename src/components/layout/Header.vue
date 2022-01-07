@@ -13,18 +13,32 @@
       <div class="text-right fn-sm col-md col-12">
         <div class="fn-w-light">Shopify Frontend Developer Application</div>
         <div>
-          <a
-            class="fn-link fn-w-bold text-primary"
-            href="https://www.aloinn.com/#/"
+          <a class="fn-w-bold text-primary" href="https://www.aloinn.com/#/"
             >Alain Nguyen</a
           >, Summer 2022
         </div>
+        <a
+          class="fn-w-light text-primary no-underline"
+          href="https://github.com/Aloinn/shopify-frontend"
+        >
+          <q-chip class="q-mx-none">
+            <span>Github Repo</span>
+            <q-icon name="ion-logo-github" class="q-ml-sm" size="sm" />
+          </q-chip>
+        </a>
       </div>
     </div>
   </q-toolbar>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.no-underline {
+  text-decoration: none;
+}
+.no-underline::hover {
+  text-decoration: none !important;
+}
+</style>
 <script>
 import { defineComponent } from 'vue';
 

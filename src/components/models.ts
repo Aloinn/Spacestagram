@@ -10,3 +10,7 @@ export interface DailyData {
   title: string;
   media_type: 'image' | 'video';
 }
+
+export interface Post {
+  likes: string[];
+}

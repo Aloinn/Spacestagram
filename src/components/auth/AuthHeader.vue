@@ -1,10 +1,10 @@
 <template>
   <div v-if="userAuth">
-    <div class="row justify-between">
+    <div class="row justify-between items-center q-my-md">
       <div class="fn-lg fn-w-light q-mb-none text-primary">
         Welcome {{ userAuth.displayName }}
       </div>
-      <div class="row q-gutter-x-sm">
+      <div class="row q-gutter-x-sm items-center">
         <q-avatar size="40px"><q-img :src="userAuth.photoURL" /></q-avatar>
         <logout-google-btn class="text-white q-my-none" />
       </div>
@@ -16,9 +16,9 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 
-import LoginGoogleBtn from 'src/components/auth/LoginGoogleBtn.vue';
 import { useFirebaseUser } from 'src/util/firebase-auth';
 import LogoutGoogleBtn from './LogoutGoogleBtn.vue';
+// import LoginGoogleBtn from './LoginGoogleBtn.vue';
 
 export default defineComponent({
   components: { LogoutGoogleBtn },
