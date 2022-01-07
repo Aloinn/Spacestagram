@@ -1,0 +1,80 @@
+@import 'node_modules/quasar/src/css/index';
+body {
+  background-color: #efefef;
+  color: $dark;
+  @extend .fn-w-thin;
+}
+.container {
+  max-width: 1200px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.fn-xxl {
+  font-size: 60pt;
+  line-height: 60pt;
+}
+.fn-xl {
+  font-size: 40pt;
+  line-height: 34pt;
+}
+
+.fn-lg {
+  font-size: 22pt;
+  line-height: 22pt;
+}
+.fn-md {
+  font-size: 14pt;
+  line-height: 18pt;
+}
+p {
+  letter-spacing: 0.4pt;
+}
+.fn-sm {
+  font-size: 12pt;
+
+  line-height: 16pt;
+}
+.fn-xs {
+  font-size: 10pt;
+  line-height: 12pt;
+}
+
+.fn-content {
+  white-space: pre-line;
+}
+.fn-no-mp {
+  margin: 0;
+  padding: 0;
+}
+.fn-w-bold {
+  font-weight: bold;
+}
+.fn-w-light {
+  font-weight: 400;
+}
+.fn-w-thin {
+  font-weight: 200;
+}
+.fn-link {
+  text-decoration: none;
+  cursor: pointer;
+}
+.fn-link:hover {
+  text-decoration: underline;
+}
+
+.fn-section-title {
+  @extend .fn-lg;
+  font-weight: 600;
+  @extend .q-mt-lg;
+  @extend .q-mb-md;
+  @extend .text-uppercase;
+}
+
+.page {
+  @extend .container;
+  @extend .q-mx-auto;
+  @extend .q-gutter-y-xl;
+  @extend .q-mb-xl;
+}
