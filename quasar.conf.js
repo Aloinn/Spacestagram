@@ -99,7 +99,7 @@ module.exports = configure(function (ctx) {
       // directives: [],
 
       // Quasar plugins
-      plugins: [],
+      plugins: ['Dialog'],
       cssAddon: true,
     },
 
@@ -142,8 +142,8 @@ module.exports = configure(function (ctx) {
       },
 
       manifest: {
-        name: 'Quasar App',
-        short_name: 'Quasar App',
+        name: 'Spacestagramp',
+        short_name: 'Spacestagramp',
         description: 'A Quasar Framework app',
         display: 'standalone',
         orientation: 'portrait',

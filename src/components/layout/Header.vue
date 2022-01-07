@@ -1,10 +1,10 @@
 <template>
   <q-toolbar class="container q-mx-auto q-pt-lg">
     <div class="row fit q-gutter-lg justify-center">
-      <div class="col-none col-md row">
+      <div class="col-none col-md row items-center">
         <div class="fn-xl">&#128640;</div>
         <div>
-          <h1 class="fn-xl fn-w-bold q-my-none">Spacestagram</h1>
+          <h1 class="fn-xl fn-w-bold q-my-none q-mb-sm">Spacestagram</h1>
           <div class="fn-w-light text-grey-6">Thank you NASA Image API!</div>
         </div>
       </div>

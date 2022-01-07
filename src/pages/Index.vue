@@ -1,7 +1,7 @@
 <template>
   <q-page class="q-mt-md fn-md">
     <div class="container q-mx-auto">
-      <auth-prompt />
+      <auth-header />
       <nasa-feed />
     </div>
   </q-page>
@@ -12,12 +12,12 @@ import { defineComponent } from 'vue';
 
 import { useFirebaseUser } from 'src/util/firebase-auth';
 
-import AuthPrompt from 'src/components/auth/AuthPrompt.vue';
+import AuthHeader from 'src/components/auth/AuthHeader.vue';
 import NasaFeed from 'src/components/nasa/NasaFeed.vue';
 
 export default defineComponent({
   components: {
-    AuthPrompt,
+    AuthHeader,
     NasaFeed,
   },
   name: 'HomePage',
