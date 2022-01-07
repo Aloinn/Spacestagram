@@ -4,7 +4,7 @@
       <div class="col-none col-md row">
         <div class="fn-xl">&#128640;</div>
         <div>
-          <h1 class="fn-xl fn-w-bold q-my-none">Astronomical</h1>
+          <h1 class="fn-xl fn-w-bold q-my-none">Spacestagram</h1>
           <div class="fn-w-light text-grey-6">Thank you NASA Image API!</div>
         </div>
       </div>

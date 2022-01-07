@@ -12,7 +12,7 @@
     <slot />
   </div>
   <div class="q-pa-lg" v-else>
-    <h2 class="fn-lg fn-w-bold q-mb-none">Welcome to Astronomical!</h2>
+    <h2 class="fn-lg fn-w-bold q-mb-none">Welcome to Spacestagram!</h2>
     <p class="q-my-md">Login with a Google Account load your store</p>
     <login-google-btn class="text-white q-my-md" />
   </div>
