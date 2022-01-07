@@ -142,9 +142,9 @@ module.exports = configure(function (ctx) {
       },
 
       manifest: {
-        name: 'Spacestagramp',
-        short_name: 'Spacestagramp',
-        description: 'A Quasar Framework app',
+        name: 'Spacestagram',
+        short_name: 'Spacestagram',
+        description: "See NASA's featured pictures",
         display: 'standalone',
         orientation: 'portrait',
         background_color: '#ffffff',

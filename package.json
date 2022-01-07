@@ -1,8 +1,8 @@
 {
   "name": "shopify-frontend",
   "version": "0.0.1",
-  "description": "A Quasar Framework app",
-  "productName": "Spacestagramp",
+  "description": "Visit NASA's Pictures of the days!",
+  "productName": "Spacestagram",
   "author": "Aloinn <46081985+Aloinn@users.noreply.github.com>",
   "private": true,
   "scripts": {
