@@ -1,6 +1,6 @@
 <template>
   <q-toolbar class="container q-mx-auto q-pt-lg">
-    <div class="row fit q-gutter-lg justify-center">
+    <div class="row fit justify-center">
       <div class="col-none col-md row items-center">
         <div class="fn-xl">&#128640;</div>
         <div>
@@ -10,11 +10,11 @@
       </div>
       <q-space class="gt-md" />
 
-      <div class="text-right fn-sm col-md col-12">
+      <div class="text-right fn-sm col-md col-12 q-mt-md-none q-mt-md">
         <div class="fn-w-light">Shopify Frontend Developer Application</div>
         <div>
           <a class="fn-w-bold text-primary" href="https://www.aloinn.com/#/"
-            >Alain Nguyen</a
+            >&copy; Alain Nguyen</a
           >, Summer 2022
         </div>
         <a

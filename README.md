@@ -1,31 +1,18 @@
-# Spacestagramp (shopify-frontend)
+# &#128640; Spacestagram
 
-A Quasar Framework app
+A webpage that pulls images using the NASA's "Picture of The Day" API and allows the user to 'like' and 'unlike' their favourite images
 
-## Install the dependencies
+## &#129680; Features
 
-```bash
-yarn
-```
+- Uses NASA Picture of the day API
+- Displays feed of space pictures, their descriptions, and post dates
+- Infinite Scroll
+- Login to like/unlike pictures, data is persistent and hosted on firebase
+- Responsive to different screen sizes! try resizing the browser
 
-### Start the app in development mode (hot-code reloading, error reporting, etc.)
+## &#128760; Tech Stack
 
-```bash
-quasar dev
-```
-
-### Lint the files
-
-```bash
-yarn run lint
-```
-
-### Build the app for production
-
-```bash
-quasar build
-```
-
-### Customize the configuration
-
-See [Configuring quasar.conf.js](https://quasar.dev/quasar-cli/quasar-conf-js).
+- TypeScript
+- Vue3 + Quasar
+- Firebase for authentication + 'like' storage
+- NASA Picture of the day API
