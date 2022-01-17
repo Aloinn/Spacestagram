@@ -62,7 +62,6 @@ export default defineComponent({
       set: (value) => {
         _todayString.value = value;
         if (Date.parse(value) == NaN || Date.parse(value) > Date.now()) {
-          console.log('invalid');
           nasaInfo.value = [];
           invalidDate.value = true;
           infiniteScroll.value.stop();
@@ -89,7 +88,6 @@ export default defineComponent({
     };
 
     const loadNasaInfo = async (index: number, done: () => void) => {
-      console.log(nDaysAgo(index));
       const response: Response = await axios.get(
         `https://api.nasa.gov/planetary/apod?date=${nDaysAgo(
           index
