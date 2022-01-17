@@ -1,7 +1,14 @@
 <template>
   <div>
-    <q-infinite-scroll @load="loadNasaInfo">
-      <div class="row q-col-gutter-x-lg">
+    <div class="row justify-end">
+      <date-picker v-model="todayString" />
+    </div>
+    <q-infinite-scroll
+      ref="infiniteScroll"
+      @load="loadNasaInfo"
+      v-if="todayString"
+    >
+      <div class="row q-col-gutter-x-lg scroll">
         <div class="column col-md-6 q-gutter-y-lg col-12">
           <nasa-card v-for="info in leftRow" :key="info.date" :info="info" />
         </div>
@@ -10,6 +17,7 @@
         </div>
       </div>
     </q-infinite-scroll>
+    <div>ASd</div>
   </div>
 </template>
 
@@ -29,18 +37,42 @@ import axios from 'axios';
 import { defineComponent, ref, computed } from 'vue';
 import NasaCard from './NasaCard.vue';
 import { DailyData, Response } from '../models';
-import { useQuasar } from 'quasar';
+import DatePicker from './DatePicker.vue';
+import { QInfiniteScroll, useQuasar } from 'quasar';
 
 export default defineComponent({
-  components: { NasaCard },
+  components: { NasaCard, DatePicker },
   setup() {
     const nasaInfo = ref<DailyData[]>([]);
+    const infiniteScroll = ref<QInfiniteScroll>(null);
+    const _todayString = ref<string>(
+      new Date().toISOString().split('T')[0].replace(/-/gi, '/')
+    );
 
-    const todayPolarity = new Date().getDate() % 2;
+    const todayString = computed({
+      get: () => _todayString.value,
+      set: (value) => {
+        _todayString.value = value;
+        if (Date.parse(value) == NaN || Date.parse(value) > Date.now()) {
+          console.log('invalid');
+          infiniteScroll.value.stop();
+          return;
+        }
+        nasaInfo.value = [];
+        infiniteScroll.value.reset();
+        infiniteScroll.value.trigger();
+      },
+    });
+
+    const today = computed<Date>(() => {
+      const todayUnix = Date.parse(todayString.value);
+      return todayUnix == NaN ? null : new Date(todayUnix);
+    });
+    // const todayPolarity = computed(() => today.value.getDate() % 2);
 
     const nDaysAgo = (days: number) => {
-      const date = new Date();
-      date.setDate(date.getDate() - days);
+      const date = new Date(today.value);
+      date.setDate(date.getDate() - days + 1);
       return date.toISOString().split('T')[0];
     };
 
@@ -48,8 +80,21 @@ export default defineComponent({
       const response: Response = await axios.get(
         `https://api.nasa.gov/planetary/apod?date=${nDaysAgo(
           index
-        )}&api_key=n456AUusbyyIwzzavMoVnUhpzb77qx4TTKKTt0cS`
+        )}&api_key=yKXLPMsNGHVd1mboSKerxFqp8v4cfraE4nJdmdQM` //13W3X6E2ESXFbqmxlecGR7b7MY1rHUZ2imRKG6i3` //yKXLPMsNGHVd1mboSKerxFqp8v4cfraE4nJdmdQM` //n456AUusbyyIwzzavMoVnUhpzb77qx4TTKKTt0cS`
       );
+      // const response = {
+      //   data: {
+      //     copyright: 'T',
+      //     date: '2001-09-09',
+      //     explanation: 'asd',
+      //     media_type: 'image' as 'image' | 'video',
+      //     hdurl:
+      //       'https://apod.nasa.gov/apod/image/2201/thundercloud_dyer_2000.jpg',
+      //     url: 'https://apod.nasa.gov/apod/image/2201/thundercloud_dyer_2000.jpg',
+      //     title: 'ASD',
+      //   },
+      // };
+
       nasaInfo.value.push(response.data);
       done();
     };
@@ -63,7 +108,16 @@ export default defineComponent({
       nasaInfo.value.filter((_, i) => i % 2 == 1)
     );
 
-    return { nasaInfo, loadNasaInfo, todayPolarity, leftRow, rightRow };
+    return {
+      today,
+      nasaInfo,
+      loadNasaInfo,
+      // todayPolarity,
+      leftRow,
+      rightRow,
+      todayString,
+      infiniteScroll,
+    };
   },
 });
 </script>

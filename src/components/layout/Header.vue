@@ -14,7 +14,7 @@
         <div class="fn-w-light">Shopify Frontend Developer Application</div>
         <div>
           <a class="fn-w-bold text-primary" href="https://www.aloinn.com/#/"
-            >&copy; Alain Nguyen</a
+            >Alain Nguyen</a
           >, Summer 2022
         </div>
         <a

@@ -102,7 +102,7 @@ export default defineComponent({
 
     const router = useRouter();
     const reroute = (date: string) => {
-      void router.push(`/images/${date}`);
+      void router.push(`images/${date}`);
     };
 
     return { like, likes, liked, share, reroute, userAuth };
