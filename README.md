@@ -10,8 +10,11 @@ Live demo: https://aloinn.github.io/Spacestagram-page/#/
 
 - Uses NASA Picture of the day API
 - Displays feed of space pictures, their descriptions, and post dates
-- Infinite Scroll
-- Login to like/unlike pictures, data is persistent and hosted on firebase
+- **Infinite Scroll**
+- **Query feed to start from a certain date**
+- **Click on image card to navigate to individual image pages**
+- **Click on the share button to copy the link to the individual image page**
+- **Login to like/unlike pictures, data is persistent and hosted on firebase**
 - Responsive to different screen sizes! try resizing the browser
 
 ## &#128760; Tech Stack
