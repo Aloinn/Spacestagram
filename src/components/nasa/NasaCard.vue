@@ -1,6 +1,10 @@
 <template>
-  <article v-if="info" class="cursor-pointer" @click="reroute(info?.date)">
-    <q-card flat bordered class="rounded-borders cursor-pointer">
+  <article
+    v-if="info"
+    :class="date ? '' : 'cursor-pointer'"
+    @click="date ? '' : reroute(info?.date)"
+  >
+    <q-card flat bordered class="rounded-borders">
       <img
         v-if="info.media_type == 'image'"
         :alt="info.title"
@@ -40,7 +44,6 @@
             <q-btn
               outline
               @click.stop="share"
-              :href="info.hdurl"
               icon="share"
               color="primary"
               size="md"
@@ -51,33 +54,52 @@
     </q-card>
   </article>
 </template>
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.video {
+  min-height: 600px;
+  max-height: 00px;
+  height: 60vw;
+}
+</style>
 
 <script lang="ts">
 import { defineComponent, PropType, ref, computed } from 'vue';
-import 'firebase/auth';
 import { DailyData, Post } from '../models';
 import firebase from 'firebase';
 import 'firebase/firestore';
+import 'firebase/auth';
 import { useFirebaseUser } from 'src/util/firebase-auth';
 import AuthDialog from '../auth/AuthDialog.vue';
 import { useQuasar } from 'quasar';
 import { useRouter } from 'vue-router';
+import useClipboard from 'vue-clipboard3';
 
 export default defineComponent({
-  props: { info: Object as PropType<DailyData> },
+  props: { info: Object as PropType<DailyData>, date: String },
   setup(props) {
     const db = firebase.firestore();
     const likes = ref<string[]>([]);
-    const postRef = db.collection('likes').doc(`${props?.info?.date || ''}`);
+    const postRef = db
+      .collection('likes')
+      .doc(`${props?.info?.date || props.date}`);
     postRef.onSnapshot((snap) => {
       likes.value = (snap.data() as Post)?.likes ?? [];
     });
     const userAuth = useFirebaseUser();
 
     const $q = useQuasar();
+
     const share = () => {
-      return;
+      const hook = useClipboard();
+      void hook.toClipboard(
+        `https://aloinn.github.io/Spacestagram-page/images/${
+          props?.info?.date || props.date
+        }`
+      );
+      $q.dialog({
+        title: 'Link copied!',
+        message: 'You can send this space image to your friends now!',
+      });
     };
     const like = async () => {
       if (!userAuth?.value) {

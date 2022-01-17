@@ -1,9 +1,10 @@
 <template>
   <div>
-    <div class="row justify-end">
+    <div class="row justify-end q-mt-md">
       <date-picker v-model="todayString" />
     </div>
     <q-infinite-scroll
+      :offset="700"
       ref="infiniteScroll"
       @load="loadNasaInfo"
       v-if="todayString"
@@ -17,18 +18,24 @@
         </div>
       </div>
     </q-infinite-scroll>
-    <div>ASd</div>
+    <div class="row justify-center">
+      <q-card flat bordered class="fit" v-if="invalidDate">
+        <q-card-section>
+          <h2 class="fn-lg fn-w-bold q-my-none q-my-sm">Invalid date!</h2>
+          <p>
+            The selected date is either invalid or in the future. Please select
+            another date
+          </p>
+        </q-card-section></q-card
+      >
+      <q-spinner v-else size="50px" />
+    </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
 .card {
   border-radius: 20px;
-}
-.video {
-  min-height: 400px;
-  max-height: 00px;
-  height: 60vw;
 }
 </style>
 
@@ -45,21 +52,26 @@ export default defineComponent({
   setup() {
     const nasaInfo = ref<DailyData[]>([]);
     const infiniteScroll = ref<QInfiniteScroll>(null);
+    const invalidDate = ref<boolean>(false);
+
     const _todayString = ref<string>(
       new Date().toISOString().split('T')[0].replace(/-/gi, '/')
     );
-
     const todayString = computed({
       get: () => _todayString.value,
       set: (value) => {
         _todayString.value = value;
         if (Date.parse(value) == NaN || Date.parse(value) > Date.now()) {
           console.log('invalid');
+          nasaInfo.value = [];
+          invalidDate.value = true;
           infiniteScroll.value.stop();
           return;
         }
+        invalidDate.value = false;
         nasaInfo.value = [];
         infiniteScroll.value.reset();
+        infiniteScroll.value.resume();
         infiniteScroll.value.trigger();
       },
     });
@@ -77,6 +89,7 @@ export default defineComponent({
     };
 
     const loadNasaInfo = async (index: number, done: () => void) => {
+      console.log(nDaysAgo(index));
       const response: Response = await axios.get(
         `https://api.nasa.gov/planetary/apod?date=${nDaysAgo(
           index
@@ -117,6 +130,7 @@ export default defineComponent({
       rightRow,
       todayString,
       infiniteScroll,
+      invalidDate,
     };
   },
 });

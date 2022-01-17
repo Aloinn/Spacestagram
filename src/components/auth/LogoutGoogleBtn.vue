@@ -1,5 +1,6 @@
 <template>
   <q-btn
+    flat
     :label="label || 'Sign out'"
     class="bg-primary text-white"
     @click="signOut"

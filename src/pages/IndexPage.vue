@@ -1,6 +1,6 @@
 <template>
   <q-page class="q-mt-md fn-md">
-    <div class="container q-mx-auto">
+    <div class="container q-mx-auto q-mt-xl">
       <auth-header />
       <nasa-feed />
     </div>

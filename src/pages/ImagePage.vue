@@ -1,8 +1,8 @@
 <template>
   <q-page class="q-mt-md fn-md">
-    <div class="container q-mx-auto">
+    <div class="container q-mx-auto q-mt-xl">
       <auth-header />
-      <nasa-card-big :info="nasaInfo" />
+      <nasa-card :info="nasaInfo" :date="imageId" />
     </div>
   </q-page>
 </template>
@@ -11,24 +11,25 @@
 import { defineComponent, ref } from 'vue';
 
 import AuthHeader from 'src/components/auth/AuthHeader.vue';
-import NasaCardBig from 'src/components/nasa/NasaCardBig.vue';
+import NasaCard from 'src/components/nasa/NasaCard.vue';
 import { DailyData } from 'src/components/models';
 import axios from 'axios';
 
 export default defineComponent({
   components: {
     AuthHeader,
-    NasaCardBig,
+    NasaCard,
   },
   name: 'ImagePage',
-  props: { date: String },
+  props: { imageId: String },
   setup(props) {
     const nasaInfo = ref<DailyData>();
     void (async () => {
-      nasaInfo.value = await axios.get(
-        `https://api.nasa.gov/planetary/apod?date=${props.date}&api_key=n456AUusbyyIwzzavMoVnUhpzb77qx4TTKKTt0cS`
+      const res = await axios.get(
+        `https://api.nasa.gov/planetary/apod?date=${props.imageId}&api_key=n456AUusbyyIwzzavMoVnUhpzb77qx4TTKKTt0cS`
       );
-    });
+      nasaInfo.value = res.data as DailyData;
+    })();
 
     return { nasaInfo };
   },

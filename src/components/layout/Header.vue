@@ -1,7 +1,10 @@
 <template>
   <q-toolbar class="container q-mx-auto q-pt-lg">
     <div class="row fit justify-center">
-      <div class="col-none col-md row items-center">
+      <div
+        class="col-none col-md row items-center cursor-pointer"
+        @click="routeHome()"
+      >
         <div class="fn-xl">&#128640;</div>
         <div>
           <h1 class="fn-xl fn-w-bold q-my-none q-mb-sm">Spacestagram</h1>
@@ -41,6 +44,15 @@
 </style>
 <script>
 import { defineComponent } from 'vue';
+import { useRouter } from 'vue-router';
 
-export default defineComponent({});
+export default defineComponent({
+  setup() {
+    const router = useRouter();
+    const routeHome = () => {
+      void router.push('/');
+    };
+    return { routeHome };
+  },
+});
 </script>

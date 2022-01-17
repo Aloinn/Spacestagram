@@ -2,7 +2,7 @@
   <div v-if="userAuth">
     <div class="row justify-between items-center q-my-md">
       <div class="fn-lg fn-w-light q-mb-none text-primary">
-        Welcome {{ userAuth.displayName }}
+        Hi {{ userAuth.displayName }}
       </div>
       <div class="row q-gutter-x-sm items-center">
         <q-avatar size="40px"><q-img :src="userAuth.photoURL" /></q-avatar>
